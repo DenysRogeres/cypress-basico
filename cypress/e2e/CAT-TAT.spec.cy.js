@@ -54,7 +54,6 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     cy.get('#email').type('denys@gmail.com')
     cy.get('#phone-checkbox').click()
     cy.get('#open-text-area').type('Não preciso de ajuda', {delay: 0})
-
     cy.get('button[type="submit"]').click()
 
     cy.get('.error').should('be.visible')
@@ -79,5 +78,15 @@ describe('Central de Atendimento ao Cliente TAT', function() {
       .clear()
       .should('have.value', '')
 
+      cy.get('#phone')
+        .type('999996661')
+        .should('have.value', '999996661')
+        .clear()
+        .should('have.value', '')
+  })
+
+  it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
+    cy.get('button[type="submit"]').click()
+    cy.get('.error').should('be.visible')
   })
 })
