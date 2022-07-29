@@ -54,7 +54,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     cy.get('#email').type('denys@gmail.com')
     cy.get('#phone-checkbox').click()
     cy.get('#open-text-area').type('Não preciso de ajuda', {delay: 0})
-    cy.get('button[type="submit"]').click()
+    cy.contains('button', 'Enviar').click()
 
     cy.get('.error').should('be.visible')
       
