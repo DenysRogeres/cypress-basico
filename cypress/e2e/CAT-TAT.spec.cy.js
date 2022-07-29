@@ -1,5 +1,6 @@
 /// <reference types="Cypress" />
 
+
 describe('Central de Atendimento ao Cliente TAT', function() {
   this.beforeEach(() => {
     cy.visit('./src/index.html')
@@ -47,7 +48,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
       .should('have.value', '')
   })
 
-  it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
+  it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
     cy.get('#firstName').type('Denys')
     cy.get('#lastName').type('Rogeres')
     cy.get('#email').type('denys@gmail.com')
@@ -55,7 +56,28 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     cy.get('#open-text-area').type('Não preciso de ajuda', {delay: 0})
 
     cy.get('button[type="submit"]').click()
+
     cy.get('.error').should('be.visible')
       
+  })
+
+  it('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
+    cy.get('#firstName').type('Denys')
+      .should('have.value', 'Denys')
+      .clear()
+      .should('have.value', '')
+
+    cy.get('#lastName')
+      .type('Rogeres')
+      .should('have.value', 'Rogeres')
+      .clear()
+      .should('have.value', '')
+
+    cy.get('#email')
+      .type('denys@gmail.com')
+      .should('have.value', 'denys@gmail.com')
+      .clear()
+      .should('have.value', '')
+
   })
 })
