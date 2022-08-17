@@ -9,7 +9,9 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT');
   });
 
-  it('preenche os campos obrigatórios e envia o formulário', () => {
+  it.only('preenche os campos obrigatórios e envia o formulário', () => {
+    cy.clock();
+
     cy.get('#firstName').type('Denys')
     cy.get('input[name="lastName"]').type('Rogeres')
     cy.get('#email').type('denys@gmail.com')
@@ -17,7 +19,12 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     cy.get('#open-text-area').type('Nao preciso de ajuda')
     cy.get('button[type=submit]').click()
 
-    cy.get('.success').should('be.visible')
+    cy.get('.success').should('be.visible');
+
+    cy.tick(3000);
+
+    cy.get('.success').should('not.be.visible');
+
   })
 
   it('preenche os campos obrigatórios e envia o formulário com menos tempo', () => {
