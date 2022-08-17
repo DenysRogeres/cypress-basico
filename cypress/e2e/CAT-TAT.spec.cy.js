@@ -205,7 +205,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
       .should('have.value', longText);
   });
 
-  it.only('Faz uma requisição HTTP', () => {
+  it('Faz uma requisição HTTP', () => {
     cy.request('https://pt.wikipedia.org/wiki/REST')
       .should(function(response){
         const { status, statusText, body } = response;
